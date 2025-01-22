@@ -128,19 +128,33 @@ function updateAccount(arrayOfAccounts) {
 }
 
 function withdraw(account) {
+    
     let amount = Number(readline.question('Enter amount to withdraw: '));
 
-    if (account.accountBalance < amount) {
-        console.log('Insufficient balance!');
-    } else {
-        account.accountBalance -= amount;
-        console.log(`Withdraw successful! Remaining balance: ${account.accountBalance}`);
-    }
+    if(!isNegativeNumber(amount)){
+        if (account.accountBalance < amount) {
+            console.log('Insufficient balance!');
+        } else {
+            account.accountBalance -= amount;
+            console.log(`Withdraw successful! Remaining balance: ${account.accountBalance}`);
+        }
+    }else{
+        console.log('Invalid amount!');
+    }  
+    
 }
 
 function deposit(account) {
     let amount = Number(readline.question('Enter amount to deposit: '));
 
-    account.accountBalance += amount;
-    console.log(`Deposit successful! New balance: ${account.accountBalance}`);
+    if(!isNegativeNumber(amount)){
+        account.accountBalance += amount;
+        console.log(`Deposit successful! New balance: ${account.accountBalance}`);
+    }else{
+        console.log('Invalid amount!');
+    }    
+}
+
+function isNegativeNumber(number) {
+    return number < 0;
 }
